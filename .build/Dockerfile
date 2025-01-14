@@ -284,6 +284,18 @@ RUN apt-get update \
  && apt-get -y install --no-install-recommends htop apt-utils iputils-ping graphviz libgraphviz-dev openssh-client \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# RUN mkdir /home/${NB_USER}/.local/share/code-server/extensions
+
+# RUN code-server --install-extension ms-python.python \
+#     && code-server --install-extension ms-toolsai.jupyter \
+#     && code-server --install-extension ms-python.black-formatter \
+#     && code-server --install-extension njpwerner.autodocstring \
+#     && code-server --install-extension eamodio.gitlens 
+
+COPY extensions/ /home/${NB_USER}/.local/share/code-server/extensions
+
 COPY start-server.py /usr/local/bin/
+
+RUN fix-permissions /home/$NB_USER
 
 USER ${NB_UID}

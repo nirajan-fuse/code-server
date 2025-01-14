@@ -22,6 +22,8 @@ if "SERVER_ARGS" in os.environ:
 bind_addr = ["--bind-addr", "0.0.0.0:8888"]
 command.extend(bind_addr)
 
+command.extend(["--abs-proxy-base-path","/user"])
+
 # Pass through any other args we were passed on the command line
 command += sys.argv[1:]
 
