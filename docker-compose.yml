@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   code-server:
     container_name: code-server
@@ -21,7 +20,7 @@ services:
     #       cpus: "31.0"
     #       memory: 48g
     ports:
-      - 8888:8080
+      - 8888:8888
     volumes:
       - ./data:/home/studio/work
     environment:
@@ -29,7 +28,7 @@ services:
       JUPYTER_ENABLE_LAB: "yes"
       NB_UID: "1000"
       NB_GID: "1000"
-      NOTEBOOK_USER: "nirajan"
+      LAB_USER: "nirajan"
       PASSWORD: "helloworld"
       EXPERIMENT-NAME: "nirajan"
     # enable sudo permissions

@@ -173,7 +173,7 @@ EXPOSE $SERVER_PORT
 CMD ["start-server.py"]
 
 # Copy local files as late as possible to avoid cache busting
-COPY start-server.py /usr/local/bin/
+# COPY start-server.py /usr/local/bin/
 
 USER root
 
@@ -283,5 +283,7 @@ RUN aim init --repo /aim
 RUN apt-get update \
  && apt-get -y install --no-install-recommends htop apt-utils iputils-ping graphviz libgraphviz-dev openssh-client \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY start-server.py /usr/local/bin/
 
 USER ${NB_UID}

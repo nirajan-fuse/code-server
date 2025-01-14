@@ -19,7 +19,7 @@ command.append("code-server")
 if "SERVER_ARGS" in os.environ:
     command += shlex.split(os.environ["SERVER_ARGS"])
 
-bind_addr = ["--bind-addr", "0.0.0.0:8080"]
+bind_addr = ["--bind-addr", "0.0.0.0:8888"]
 command.extend(bind_addr)
 
 # Pass through any other args we were passed on the command line
