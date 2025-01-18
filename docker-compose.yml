@@ -1,7 +1,7 @@
 services:
   code-server:
     container_name: code-server
-    build: .build
+    build: .code-server-build
     deploy:
       resources:
         reservations:
@@ -17,7 +17,6 @@ services:
       JUPYTER_ENABLE_LAB: "yes"
       NB_UID: "1000"
       NB_GID: "1000"
-      LAB_USER: "nirajan"
       PASSWORD: "helloworld"
       EXPERIMENT-NAME: "nirajan"
     # enable sudo permissions
@@ -25,11 +24,12 @@ services:
       "root"
     restart: always
 
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: nginx-proxy
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./nginx_config:/etc/nginx/conf.d/
-  #   restart: always
+  nginx:
+    container_name: nginx-proxy
+    build: .nginx-build
+    ports:
+      - "80:80"
+    environment:
+      LAB_USER: "nirajan"
+    restart: always
+    
