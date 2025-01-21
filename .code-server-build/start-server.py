@@ -2,6 +2,7 @@
 import os
 import shlex
 import sys
+import subprocess
 
 # Entrypoint is start.sh
 command = []
@@ -19,8 +20,12 @@ command.append("code-server")
 if "SERVER_ARGS" in os.environ:
     command += shlex.split(os.environ["SERVER_ARGS"])
 
-bind_addr = ["--bind-addr", "0.0.0.0:8888"]
+bind_addr = ["--bind-addr", "0.0.0.0:8080"]
 command.extend(bind_addr)
+
+subprocess.Popen(["/bin/bash", "/tmp/start-nginx.sh"])
+
+# command = ["bash", "-c", " ".join(command) + " & /tmp/start-nginx.sh"]
 
 # command.extend(["--abs-proxy-base-path","/user"])
 
