@@ -185,6 +185,7 @@ RUN apt-get update --yes && \
     git \
     nano-tiny \
     tzdata \
+    gettext-base \
     unzip \
     vim-tiny \
     # git-over-ssh
@@ -284,6 +285,24 @@ RUN apt-get update \
  && apt-get -y install --no-install-recommends htop apt-utils iputils-ping graphviz libgraphviz-dev openssh-client \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install nginx packages
+RUN apt-get update && \
+    apt-get install -y wget gnupg2 curl software-properties-common && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y nginx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+
+COPY 20-envsubst-on-templates.sh /tmp
+
+RUN chmod +x /tmp/20-envsubst-on-templates.sh
+
+COPY start-nginx.sh /tmp
+RUN chmod +x /tmp/start-nginx.sh
+
 # RUN mkdir /home/${NB_USER}/.local/share/code-server/extensions
 
 # RUN code-server --install-extension ms-python.python \
@@ -294,8 +313,9 @@ RUN apt-get update \
 
 COPY extensions/ /home/${NB_USER}/.local/share/code-server/extensions
 
-COPY start-server.py /usr/local/bin/
-
 RUN fix-permissions /home/$NB_USER
+RUN fix-permissions /etc/nginx
+
+COPY start-server.py /usr/local/bin/
 
 USER ${NB_UID}
