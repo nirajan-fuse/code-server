@@ -1,0 +1,25 @@
+server {
+    listen 8888;
+    listen [::]:8888;
+    server_name localhost;
+
+    # location / {
+    #     root   /usr/share/nginx/html;
+    #     index  index.html index.htm;
+    # }
+
+    location /${LAB_USER}/ {
+        proxy_pass http://localhost:8080/;
+        proxy_set_header Host $host;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection upgrade;
+        proxy_set_header Accept-Encoding gzip;
+        proxy_set_header X-Forwarded-Host $host:$server_port;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+}
