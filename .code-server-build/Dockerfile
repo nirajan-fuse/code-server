@@ -303,6 +303,9 @@ RUN chmod +x /tmp/20-envsubst-on-templates.sh
 COPY start-nginx.sh /tmp
 RUN chmod +x /tmp/start-nginx.sh
 
+COPY login-with-args.html /tmp
+RUN chmod +x /tmp/login-with-args.html
+
 # RUN mkdir /home/${NB_USER}/.local/share/code-server/extensions
 
 # RUN code-server --install-extension ms-python.python \

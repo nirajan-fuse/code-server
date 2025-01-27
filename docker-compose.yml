@@ -14,7 +14,6 @@ services:
       - ./data:/home/studio/work
     environment:
       GRANT_SUDO: "yes"
-      JUPYTER_ENABLE_LAB: "yes"
       NB_UID: "1000"
       NB_GID: "1000"
       PASSWORD: "hello"
