@@ -274,11 +274,9 @@ RUN mamba install -n base conda && \
 USER root
 
 RUN mkdir /aim
-RUN chmod 777 /aim
+RUN fix-permissions /aim
 
 RUN ln -s $CONDA_DIR/bin/ptxas /usr/bin/ptxas
-
-RUN aim init --repo /aim
 
 # Install useful packages and Graphviz
 RUN apt-get update \

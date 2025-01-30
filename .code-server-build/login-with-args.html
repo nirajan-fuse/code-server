@@ -20,7 +20,7 @@
           <div class="sub">Please log in below.</div>
         </div>
         <div class="content">
-          <form class="login-form" method="post" action="/${LAB_USER}/login">
+          <form class="login-form" method="post" action="/${NOTEBOOK_USER}/login">
             <input class="user" type="text" autocomplete="username">
             <input id="base" type="hidden" name="base" value=".">
             <input id="href" type="hidden" name="href">
@@ -36,10 +36,10 @@
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const password = urlParams.get('password');
+        const password = urlParams.get('token');
         document.getElementsByClassName("password")[0].value = password;
         document.getElementById("href").value = document.location;
-        window.history.pushState("NULL", "Login", "/${LAB_USER}/login");
+        window.history.pushState("NULL", "Login", "/${NOTEBOOK_USER}/login");
         document.getElementsByClassName("login-form")[0].submit()
     </script>
   

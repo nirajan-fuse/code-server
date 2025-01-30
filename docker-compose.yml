@@ -17,7 +17,7 @@ services:
       NB_UID: "1000"
       NB_GID: "1000"
       PASSWORD: "hello"
-      LAB_USER: "nirajan"
+      NOTEBOOK_USER: "nirajan"
       EXPERIMENT-NAME: "nirajan"
     # enable sudo permissions
     user:
