@@ -314,9 +314,16 @@ RUN chmod +x /tmp/login-with-args.html
 
 COPY extensions/ /home/${NB_USER}/.local/share/code-server/extensions
 
-RUN fix-permissions /home/$NB_USER
 RUN fix-permissions /etc/nginx
 
 COPY start-server.py /usr/local/bin/
+
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    /bin/python3 get-pip.py
+
+RUN mamba install -c conda-forge ipykernel
+
+RUN fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
 USER ${NB_UID}
